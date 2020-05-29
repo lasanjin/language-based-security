@@ -1,0 +1,21 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+logs
+
+# User-specific stuff
+.idea
+*.iml
+*.ipr
+
+# IntelliJ
+out/
+target/
+
+#Maven
+.mvn
+
+#Python
+__pycache__/
