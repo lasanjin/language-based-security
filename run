@@ -3,7 +3,7 @@
 BOLD='\e[1m'
 GREEN='\e[32m'
 DEFAULT='\e[0m'
-STRING='[SCRIPT INFO]'
+STRING='[RUN INFO]'
 INFO=${GREEN}${BOLD}${STRING}${DEFAULT}
 
 get_spring_pid() {
