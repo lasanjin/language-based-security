@@ -4,7 +4,7 @@ Project from Language-Based Security course at Chalmers.
 ## How to run
 - Execute script
 ```
-$ ./run 
+$ ./run run all 
 ```
 
 - DIY

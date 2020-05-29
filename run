@@ -3,30 +3,107 @@
 BOLD='\e[1m'
 GREEN='\e[32m'
 DEFAULT='\e[0m'
-STRING="[SCRIPT INFO]"
+STRING='[SCRIPT INFO]'
 INFO=${GREEN}${BOLD}${STRING}${DEFAULT}
 
-echo -e "${INFO} WAITING FOR SPRING BOOT TO START...\n"
-mvn -f SecureLogin/ spring-boot:start
-curl --silent --insecure --output /dev/null https://localhost:8443
-sleep 1
+get_spring_pid() {
+    echo $(ps aux | grep SpringApplication | awk 'NR==1{print $2}')
+}
 
-echo -e "\n${INFO} SPRING APPLICATION LAUNCHED"
-sleep 1
+run_spring_app() {
+    if [[ "200" != $(is_spring_running) ]]; then
+        if [[ "$1" == "print" ]]; then
+            echo -e "${INFO} LAUNCHING SPRING APPLICATION..."
+        fi
+        echo
+        mvn -f SecureLogin/ spring-boot:start
+        curl --silent --insecure --output /dev/null https://localhost:8443
+        sleep 1
+        echo -e "\n${INFO} SPRING APPLICATION LAUNCHED"
+        sleep 1
+    else
+        echo -e "${INFO} SPRING APPLICATION IS ALREADY RUNNING (PID: $(get_spring_pid))"
+        sleep 1
+    fi
+}
+exit_spring_app() {
+    if ! [[ $(get_spring_pid) =~ '^[0-9]+$' ]] && [[ "200" == $(is_spring_running) ]]; then
+        echo -n $(kill -9 $(get_spring_pid))
+        echo -e "\n${INFO} EXIT SPRING APPLICATION"
+        sleep 1
+    else
+        echo -e "${INFO} NO SPRING APPLICATION RUNNING"
+        sleep 1
+    fi
+}
 
-echo -e "${INFO} LAUNCHING BRUTE-FORCE ATTACKS..."
-sleep 1
+exec_bruteforce() {
+    if [[ "200" == $(is_spring_running) ]]; then
+        if [[ "$1" == "print" ]]; then
+            echo -e "${INFO} LAUNCHING BRUTEFORCE..."
+        fi
+        ./attacks/bruteforce.py
+        sleep 1
+    else
+        echo -e "${INFO} NO RESPONSE FROM https://localhost:8443"
+        sleep 1
+        echo -e "${INFO} RUN SPRING APPLICATION?"
+        sleep 1
+    fi
+}
 
-echo -e "${INFO} PLEASE WAIT TO FINISH"
-sleep 2
+exec_mbruteforce() {
+    if [[ "200" == $(is_spring_running) ]]; then
+        if [[ "$1" == "print" ]]; then
+            echo -e "${INFO} LAUNCHING MULTITHREADED_BRUTEFORCE..."
+            sleep 1
+        fi
+        ./attacks/multithreaded_bruteforce.py
+        sleep 1
+    else
+        echo -e "${INFO} NO RESPONSE FROM https://localhost:8443"
+        sleep 1
+        echo -e "${INFO} RUN SPRING APPLICATION?"
+        sleep 1
+    fi
+}
 
-./attacks/bruteforce.py
-sleep 1
+is_spring_running() {
+    echo $(
+        curl \
+            --silent \
+            --write-out "%{http_code}" \
+            --output /dev/null \
+            --insecure https://localhost:8443
+    )
+}
 
-./attacks/multithreaded_bruteforce.py
-sleep 1
+case "$@" in
+"run all")
+    echo -e "${INFO} WAITING FOR SPRING APPLICATION TO START..."
+    run_spring_app
+    echo -e "${INFO} LAUNCHING BRUTE-FORCE ATTACKS..."
+    sleep 1
+    echo -e "${INFO} PLEASE WAIT TO FINISH"
+    sleep 1
+    exec_bruteforce
+    exec_mbruteforce
+    exit_spring_app
+    ;;
+"run")
+    run_spring_app "print"
+    ;;
 
-echo -e "\n${INFO} EXIT SPRING APPLICATION"
-sleep 2
-
-ps aux | grep SpringApplication | awk 'NR==1{print $2}' | xargs kill -9
+"exit")
+    exit_spring_app
+    ;;
+"bf")
+    exec_bruteforce "print"
+    ;;
+"mbf")
+    exec_mbruteforce "print"
+    ;;
+*)
+    echo "./run run all | run | exit | bf | mbf"
+    ;;
+esac
