@@ -172,15 +172,10 @@ def print_exit(success, attempts, t0):
         print(u.error(), "FAILED TO FIND CREDENTIALS")
 
     t = time.time() - t0
-    print_elapsed_time(t)
-    print(u.info(), round(attempts / t, 2), "(pw/s)")
-
-
-def print_elapsed_time(t0=None):
-    t = time.time() - t0 if t0 is None else t0
     hours, rem = divmod(t, 3600)
     minutes, seconds = divmod(rem, 60)
     print("%s TIME: %dh%dm%ds" % (u.info(), hours, minutes, seconds))
+    print(u.info(), round(attempts / t, 2), "pw/s")
 
 
 def print_banner():

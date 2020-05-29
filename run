@@ -12,15 +12,20 @@ curl --silent --insecure --output /dev/null https://localhost:8443
 sleep 1
 
 echo -e "\n${INFO} SPRING APPLICATION LAUNCHED"
-sleep 2
+sleep 1
 
-echo -e "${INFO} LAUNCH BRUTE-FORCE ATTACKS, PLEASE WAIT"
+echo -e "${INFO} LAUNCHING BRUTE-FORCE ATTACKS..."
+sleep 1
+
+echo -e "${INFO} PLEASE WAIT TO FINISH"
 sleep 2
 
 ./attacks/bruteforce.py
-sleep 2
+sleep 1
 
 ./attacks/multithreaded_bruteforce.py
+sleep 1
+
 echo -e "\n${INFO} EXIT SPRING APPLICATION"
 sleep 2
 

@@ -237,15 +237,10 @@ def print_progress(attempts, num_of_passwords):
 
 def print_exit(attempts):
     t = time.time() - t0
-    print_elapsed_time(t)
-    print(u.info(), round(attempts / t, 2), 'pw/s')
-
-
-def print_elapsed_time(t=None):
-    t = time.time() - t0 if t is None else t
     hours, rem = divmod(t, 3600)
     minutes, seconds = divmod(rem, 60)
     print('%s TIME: %dh%dm%ds' % (u.info(), hours, minutes, seconds))
+    print(u.info(), round(attempts / t, 2), 'pw/s')
 
 
 def print_banner():
