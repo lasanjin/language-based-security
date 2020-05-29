@@ -8,5 +8,8 @@ $ mvn spring-boot:run
 ```
 
 ## Demo
+ - Home page
 <img src="demo/home_page.png" width="">
+
+ - Login page
 <img src="demo/login_page.png" width="">
