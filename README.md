@@ -1,5 +1,5 @@
 # Language-Based Security
-Project from Language-Based Security course at Chalmers.
+Project from Language-Based Security course at Chalmers. Runs with Java 11 and Python 3.6
 
 ## How to run
 - Execute script
@@ -8,7 +8,7 @@ $ ./run run all
 ```
 
 - DIY
-  1. Run Spring Boot application [SecureLogin](../SecureLogin)
+  1. Run Spring Boot application [SecureLogin](SecureLogin)
      - `mvn -f SecureLogin/ spring-boot:start`
   2. Execute brute-force attack(s)
      - `./attacks/bruteforce.py`
