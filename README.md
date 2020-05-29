@@ -8,7 +8,7 @@ $ ./run
 ```
 
 - DIY
-  1. Run Spring Boot application [SecureLogin](../SecureLogin)
+  1. Run Spring Boot application [SecureLogin](SecureLogin)
      - `mvn -f SecureLogin/ spring-boot:start`
   2. Execute brute-force attack(s)
      - `./attacks/bruteforce.py`
