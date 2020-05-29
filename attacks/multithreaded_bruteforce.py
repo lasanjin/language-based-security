@@ -15,7 +15,7 @@ import re
 import os
 
 
-PASSWORDS = 'utils/passwords10k.txt'
+PASSWORDS = os.path.join(os.path.dirname(__file__), 'utils/passwords10k.txt')
 TARGET = 'https://localhost:8443/login'
 SUCCESS = 'https://localhost:8443/'
 SESSION_COOKIE = 'JSESSIONID'
@@ -26,6 +26,7 @@ t0 = 0
 
 
 def main():
+
     print_banner()
     # Ignore unverified HTTPS request warnings:
     disable_warnings(InsecureRequestWarning)

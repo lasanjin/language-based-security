@@ -1,0 +1,27 @@
+#!/bin/bash
+
+BOLD='\e[1m'
+GREEN='\e[32m'
+DEFAULT='\e[0m'
+STRING="[SCRIPT INFO]"
+INFO=${GREEN}${BOLD}${STRING}${DEFAULT}
+
+echo -e "${INFO} WAITING FOR SPRING BOOT TO START...\n"
+mvn -f SecureLogin/ spring-boot:start
+curl --silent --insecure --output /dev/null https://localhost:8443
+sleep 1
+
+echo -e "\n${INFO} SPRING APPLICATION LAUNCHED"
+sleep 2
+
+echo -e "${INFO} LAUNCH BRUTE-FORCE ATTACKS, PLEASE WAIT"
+sleep 2
+
+./attacks/bruteforce.py
+sleep 2
+
+./attacks/multithreaded_bruteforce.py
+echo -e "\n${INFO} EXIT SPRING APPLICATION"
+sleep 2
+
+ps aux | grep SpringApplication | awk 'NR==1{print $2}' | xargs kill -9

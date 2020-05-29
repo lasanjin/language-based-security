@@ -10,9 +10,10 @@ from utils import utils as u
 import time
 import sys
 import re
+import os
 
 
-PASSWORDS = 'utils/passwords10k.txt'
+PASSWORDS = os.path.join(os.path.dirname(__file__), 'utils/passwords10k.txt')
 TARGET = 'https://localhost:8443/login'
 SUCCESS = 'https://localhost:8443/'
 SESSION_COOKIE = 'JSESSIONID'
