@@ -26,7 +26,6 @@ t0 = 0
 
 
 def main():
-
     print_banner()
     # Ignore unverified HTTPS request warnings:
     disable_warnings(InsecureRequestWarning)
@@ -130,7 +129,7 @@ def build_session():
     session_cookie, csrf_token = get_session_tokens(session)
 
     headers = {'User-Agent':
-               'Mozilla/5.0 (BF; Ubuntu; Linux x86_64; rv:76.0) '
+               'Mozilla/5.0 (MBF; Ubuntu; Linux x86_64; rv:76.0) '
                'Gecko/20100101 Firefox/76.0',
                'Accept': '*/*',
                'Connection': 'keep-alive',
