@@ -1,5 +1,5 @@
 # Language-Based Security
-Project from Language-Based Security course at Chalmers.
+Project from Language-Based Security course at Chalmers. Runs with Java 11 and Python 3.6
 
 ## How to run
 - Execute script
