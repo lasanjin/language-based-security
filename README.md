@@ -15,3 +15,7 @@ $ ./run
      - `./attacks/multithreaded_bruteforce.py`
   3. Kill Spring application
      - `ps aux | grep SpringApplication | awk 'NR==1{print $2}' | xargs kill -9`
+
+
+## Demo
+<img src="demo.gif">
