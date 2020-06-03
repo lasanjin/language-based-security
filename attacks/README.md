@@ -3,6 +3,9 @@ Brute-force attacks with wordlists from [SecList](https://github.com/danielmiess
 
 
 ## Description
+Both attacks have identical "helper functions" (intentionally).
+
+
 ### [`brutforce.py`](bruteforce.py)
  - Single threaded brute-force attack
 

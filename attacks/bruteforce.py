@@ -57,9 +57,9 @@ def brute_force():
     return False, attempts
 
 
-######################################################################
+# -----------------------------------------------------------------
 # HELPER FUNCTIONS
-######################################################################
+# -----------------------------------------------------------------
 def read_passwords():
     try:
         with open(PASSWORDS, 'r') as passwords:
@@ -105,9 +105,7 @@ def get_session_tokens(session, do_print=False):
 
     except Exception as e:
         print(u.warn(), 'NO TOKENS(S) FOUND')
-        session_cookie, csrf_token = '', ''
-        success = False
-        pass
+        return '', ''
 
     if success and do_print:
         print_tokens(csrf_token, session_cookie)
@@ -145,9 +143,9 @@ def request(req, session, payload=None):
         print(u.warn(), 'RequestException:', er)
 
 
-######################################################################
+# -----------------------------------------------------------------
 # PRINT
-######################################################################
+# -----------------------------------------------------------------
 def print_tokens(csrf, jsession_id):
     print(u.info(), "FOUND TOKENS")
     print(u.info(), "_csrf:", csrf)

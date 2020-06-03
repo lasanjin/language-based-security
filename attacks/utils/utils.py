@@ -31,7 +31,7 @@ class color:
 
     @staticmethod
     def red(output):
-        return color.RED + str(output) + color.DEFAULT
+        return color.RED + output + color.DEFAULT
 
     @staticmethod
     def yellow(output):
