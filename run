@@ -26,10 +26,11 @@ run_spring_app() {
         sleep 1
     fi
 }
+
 exit_spring_app() {
     if ! [[ $(get_spring_pid) =~ '^[0-9]+$' ]] && [[ "200" == $(is_spring_running) ]]; then
-        echo -n $(kill -9 $(get_spring_pid))
-        echo -e "\n${INFO} EXIT SPRING APPLICATION"
+        kill -9 $(get_spring_pid)
+        echo -e "${INFO} EXIT SPRING APPLICATION"
         sleep 1
     else
         echo -e "${INFO} NO SPRING APPLICATION RUNNING"
@@ -88,6 +89,7 @@ case "$@" in
     sleep 1
     exec_bruteforce
     exec_mbruteforce
+    echo
     exit_spring_app
     ;;
 "run")
