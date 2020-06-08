@@ -9,6 +9,7 @@ $ ./run run all
 
 - DIY
   1. Run Spring Boot application [SecureLogin](SecureLogin)
+     - `cd SecureLogin/ && mvn clean package && cd ..`
      - `mvn -f SecureLogin/ spring-boot:start`
   2. Execute brute-force attack(s)
      - `./attacks/bruteforce.py`
