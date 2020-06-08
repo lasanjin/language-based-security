@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+ABS_PATH = os.path.dirname(__file__)
+sys.path.append(os.path.join(ABS_PATH, 'modules'))
+
 # To disable warnings in requests' vendored urllib3, import that specific instance of the module:
 from urllib3.exceptions import InsecureRequestWarning
 from urllib3 import disable_warnings
@@ -8,12 +13,10 @@ from modules.requests import Session, exceptions
 from modules.bs4 import BeautifulSoup
 from utils import utils as u
 import time
-import sys
 import re
-import os
 
 
-PASSWORDS = os.path.join(os.path.dirname(__file__), 'utils/passwords10k.txt')
+PASSWORDS = os.path.join(ABS_PATH, 'utils/passwords10k.txt')
 TARGET = 'https://localhost:8443/login'
 SUCCESS = 'https://localhost:8443/'
 SESSION_COOKIE = 'JSESSIONID'

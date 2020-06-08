@@ -16,6 +16,7 @@ run_spring_app() {
             echo -e "${INFO} LAUNCHING SPRING APPLICATION..."
         fi
         echo
+        cd SecureLogin/ && mvn clean package cd ..
         mvn -f SecureLogin/ spring-boot:start
         curl --silent --insecure --output /dev/null https://localhost:8443
         sleep 1
